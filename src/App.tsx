@@ -59,21 +59,15 @@ function App() {
     }
 
     // Determine highest stat for tiebreaker
-    if (pokemon2.attack > highestStat.value) {
-      highestStat = { pokemon: pokemon2, stat: 'attack', value: pokemon2.attack };
-    }
-    if (pokemon1.defense > highestStat.value) {
-      highestStat = { pokemon: pokemon1, stat: 'defense', value: pokemon1.defense };
-    }
-    if (pokemon2.defense > highestStat.value) {
-      highestStat = { pokemon: pokemon2, stat: 'defense', value: pokemon2.defense };
-    }
-    if (pokemon1.power > highestStat.value) {
-      highestStat = { pokemon: pokemon1, stat: 'power', value: pokemon1.power };
-    }
-    if (pokemon2.power > highestStat.value) {
-      highestStat = { pokemon: pokemon2, stat: 'power', value: pokemon2.power };
-    }
+    const stats = ['attack', 'defense', 'power'] as const;
+    stats.forEach(stat => {
+      if (pokemon1[stat] > highestStat.value) {
+        highestStat = { pokemon: pokemon1, stat, value: pokemon1[stat] };
+      }
+      if (pokemon2[stat] > highestStat.value) {
+        highestStat = { pokemon: pokemon2, stat, value: pokemon2[stat] };
+      }
+    });
 
     if (score1 > score2) {
       return { winner: pokemon1, loser: pokemon2 };
@@ -83,7 +77,7 @@ function App() {
       return {
         winner: highestStat.pokemon,
         loser: highestStat.pokemon === pokemon1 ? pokemon2 : pokemon1,
-        tiebreaker: highestStat.stat as 'attack' | 'defense' | 'power'
+        tiebreaker: highestStat.stat
       };
     }
   };
@@ -105,7 +99,7 @@ function App() {
     <div className="min-h-screen bg-gray-100 p-8 flex flex-col">
       <div className="flex-grow">
         <div className="flex flex-col items-center justify-center mb-8">
-          <h1 className="text-5xl font-bold text-center mb-4 text-blue-600 shadow-text">Pokémon Battle Game</h1>
+          <h1 className="text-5xl font-bold text-center mb-4 text-blue-600 shadow-text animate-pulse">Pokémon Battle Game</h1>
           <div className="flex items-center">
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Pokeball" className="w-12 h-12 mr-4 animate-bounce" />
             <a 

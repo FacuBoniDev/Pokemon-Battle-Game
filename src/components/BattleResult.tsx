@@ -12,7 +12,7 @@ const BattleResultModal: React.FC<BattleResultModalProps> = ({ result, onReset }
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg text-center animate-fadeIn">
-        <h2 className="text-3xl font-bold mb-4 text-blue-600 shadow-text">Battle Result</h2>
+        <h2 className="text-3xl font-bold mb-4 text-blue-600 shadow-text animate-bounce">Battle Result</h2>
         <p className="text-2xl mb-2">
           Winner: <span className="font-bold text-green-600">{result.winner.name}</span>
         </p>
